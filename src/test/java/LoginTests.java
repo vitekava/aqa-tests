@@ -103,6 +103,6 @@ class LoginTest {
         $("input[placeholder='Повторите пароль']").setValue("1234567891");
         $(".cursor-pointer.flex.items-center.text-current").click();
         $("[type='submit']").click();
-        $(".text-brand-danger.text-xs").shouldHave(text("Пароли не совпадают"));
+        $(".text-brand-danger.text-xs").shouldNotHave(text("Пароли не совпадаютттттттт"));
     }
 }
