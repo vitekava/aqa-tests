@@ -87,7 +87,7 @@ class LoginTest {
         $("input[placeholder='Повторите пароль']").setValue("1234567890");
         $(".cursor-pointer.flex.items-center.text-current").click();
         $("[type='submit']").click();
-        $(".bg-brand-danger.text-white").shouldHave(text("Такой пользователь уже существует"));
+        $(".bg-brand-danger.text-white").shouldHave(text("Такой пользователь уже НЕ существует"));
 
     }
     @Test
