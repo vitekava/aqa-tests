@@ -105,4 +105,59 @@ class LoginTest {
         $("[type='submit']").click();
         $(".text-brand-danger.text-xs").shouldNotHave(text("Пароли не совпадаютттттттт"));
     }
+    @Test
+    void FormTestDemoqa() {
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "1920x1080";
+        //Configuration.pageLoadStrategy = "none";
+
+        open("https://demoqa.com/automation-practice-form");
+        $(".text-center").shouldHave(text("Practice Form"));
+
+        $("#firstName").setValue("Viktor");
+        $("#lastName").setValue("Avruiskii");
+        $("#userEmail").setValue("vitya@vitya.com");
+        $("[for ='gender-radio-1']").click();
+        $("#userNumber").setValue("89005678909");
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__year-select").click();
+        $(".react-datepicker__year-select [value='1996']").click();
+        $(".react-datepicker__month-select").click();
+        $(".react-datepicker__month-select [value='4']").click();
+        $(".react-datepicker__day.react-datepicker__day--001[aria-label='Choose Wednesday, May 1st, 1996']").click();
+        $("#subjectsContainer").click();
+        $("input[autocapitalize='none']").setValue("Maths").pressEnter();
+        $("[for = 'hobbies-checkbox-1']").click();
+
+        String filePath = "C:/Users/avrui/Downloads/Снимок экрана 2024-10-23 в 13.01.04.png";
+        $("#uploadPicture").sendKeys(filePath);
+
+        $("textarea[placeholder='Current Address']").setValue("Улица Пушкина, дом Колотушкина");
+
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight);");
+
+        //$("#state").click();
+
+        //actions().moveToElement($("#userForm").$("#stateCity-wrapper").sibling(0)).perform();
+        $("#state").click();
+        $("#react-select-3-option-1").shouldBe(text("Uttar Pradesh")).click();
+        $("#city").click();
+        $("#react-select-4-option-1").shouldBe(text("Lucknow")).click();
+
+        $("#subjectsInput").pressEnter();
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
 }
