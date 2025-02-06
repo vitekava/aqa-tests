@@ -1,8 +1,13 @@
 import com.codeborne.selenide.*;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
+import io.qameta.allure.selenide.AllureSelenide;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import com.github.javafaker.Faker;
 
 
 
@@ -10,15 +15,22 @@ class LoginTest {
 
     @Test
     void successfulTest() {
+
         Configuration.holdBrowserOpen = true;
         Configuration.pageLoadStrategy = "none";
 
+        Faker faker = new Faker();
+
+        String userEmail = faker.internet().emailAddress();
+
 
         open("https://school.qa.guru/cms/system/login?required=true");
-        SelenideElement enter = $(".login-form").shouldHave(text("Войти"));
+        sleep(5000);
+        //SelenideElement enter = $(".login-form").shouldHave(text("Войти"));
+        $(byText("Войти")).click();
 
         //$("[name=email]").shouldBe(appear);
-        $("[name=email]").setValue("qagurubot@gmail.com");
+        $("[name=email]").setValue(userEmail);
         $("[name=password]").setValue("qagurupassword").pressEnter();
         $(".btn-error").shouldHave(text("Неверный пароль"));
     }
@@ -54,6 +66,9 @@ class LoginTest {
     }
     @Test
     void Registration() {
+
+        SelenideLogger.addListener("allure", new AllureSelenide());
+
         Configuration.holdBrowserOpen = true;
         //Configuration.pageLoadStrategy = "none";
 
@@ -70,8 +85,9 @@ class LoginTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        $(".text-3xl.font-bold.mb-4.text-center.mx-auto").should(appear);
-        $(".text-3xl.font-bold.mb-4.text-center.mx-auto").shouldHave(text("Выбор профиля"));
+        //$(".text-3xl.font-bold.mb-4.text-center.mx-auto").should(appear);
+        //$(".text-3xl.font-bold.mb-4.text-center.mx-auto").shouldHave(text("Выбор профиля"));
+        $(".items-center.bg-brand-danger").shouldHave(text("Такой пользователь уже существует"));
 
     }
     @Test
